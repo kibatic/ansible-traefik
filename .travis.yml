@@ -1,15 +1,9 @@
 ---
-language: python
-python: "2.7"
-
 # Use the new container infrastructure
-sudo: false
+sudo: required
 
-# Install ansible
-addons:
-  apt:
-    packages:
-    - python-pip
+services:
+  - docker
 
 env:
   - ANSIBLE_VERSION: 1.9
@@ -17,12 +11,14 @@ env:
   - ANSIBLE_VERSION: 2.1
   - ANSIBLE_VERSION: 2.2
 
-install:
-  # Install ansible
-  - pip install ansible~=$ANSIBLE_VERSION
+before_install:
+  # Pull container
+  - sudo docker pull kitpages/docker-ansible:$ANSIBLE_VERSION
+  - alias ansible-playbook="docker run -it --rm -v ${PWD}:/ansible -w /ansible kitpages/docker-ansible:$ANSIBLE_VERSION ansible-playbook"
 
+install:
   # Check ansible version
-  - ansible --version
+  - ansible-playbook --version
 
   # Create ansible.cfg with correct roles_path
   - printf '[defaults]\nroles_path=../' >ansible.cfg
