@@ -1,5 +1,24 @@
 # tasks file for kibatic.traefik
 ---
+- name: Create traefik systemd unit
+  get_url:
+    url: "{{ item.url }}"
+    dest: "{{ item.dest }}"
+    owner: root
+    group: root
+    mode: 0755
+  with_items:
+    - url: "{{ traefik_systemd_unit }}"
+      dest: "{{ traefik_bin_path }}"
+  notify: restart traefik
+  tags: traefik_config
+
+- name: Reload systemd daemon
+  shell: systemctl daemon-reload
+  tags:
+      - systemd
+      - systemd_units
+
 - name: Ensure install & config directory exists
   file:
     path: "{{ item }}"
@@ -15,7 +34,6 @@
     owner: root
     group: root
     mode: 0755
-  notify: restart traefik
   with_items:
     - url: "{{ traefik_binary_url }}"
       dest: "{{ traefik_bin_path }}"
@@ -27,18 +45,4 @@
     owner: root
     group: root
     mode: 0744
-  notify: restart traefik
-  tags: traefik_config
-
-- name: Create traefik systemd unit
-  get_url:
-    url: "{{ item.url }}"
-    dest: "{{ item.dest }}"
-    owner: root
-    group: root
-    mode: 0755
-  with_items:
-    - url: "{{ traefik_systemd_unit }}"
-      dest: "{{ traefik_bin_path }}"
-  notify: restart traefik
   tags: traefik_config
