@@ -17,12 +17,14 @@ before_install:
   - sudo docker pull kitpages/docker-ansible:$ANSIBLE_VERSION
 
 install:
-  - alias ansible-playbook="docker run -it --rm -v ${PWD}:/ansible -w /ansible kitpages/docker-ansible:$ANSIBLE_VERSION ansible-playbook"
   # Check ansible version
-  - ansible-playbook --version
+  - sudo docker run -it --rm -v ${PWD}:/ansible -w /ansible kitpages/docker-ansible:$ANSIBLE_VERSION ansible-playbook --version
 
   # Create ansible.cfg with correct roles_path
   - printf '[defaults]\nroles_path=../' >ansible.cfg
+
+  # Check syntax
+  - sudo docker run -it --rm -v ${PWD}:/ansible -w /ansible kitpages/docker-ansible:$ANSIBLE_VERSION ansible-playbook tests/test.yml -i tests/inventory --syntax-check
 
 script:
   # Basic role syntax check
