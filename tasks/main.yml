@@ -8,8 +8,8 @@
     group: root
     mode: 0755
   with_items:
-    - url: "{{ traefik_systemd_unit }}"
-      dest: "{{ traefik_bin_path }}"
+    - url: "{{ traefik_systemd_unit_url }}"
+      dest: "{{ traefik_systemd_unit_dest }}"
   notify: restart traefik
   tags: traefik_config
 
