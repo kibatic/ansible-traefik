@@ -1,7 +1,9 @@
 Role Name
 =========
 
-A brief description of the role goes here.
+Ansible role to deploy traefik binary and systemd unit.
+
+[![Build Status](https://travis-ci.org/kibatic/ansible-traefik.svg?branch=master)](https://travis-ci.org/kibatic/ansible-traefik)
 
 Role Variables
 --------------
