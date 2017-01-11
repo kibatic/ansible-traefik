@@ -24,14 +24,23 @@ traefik_systemd_unit_dest: /etc/systemd/system/traefik.service
 ```
 
 
-Example Playbook
+Configuration
 ----------------
 
-Including an example of how to use your role (for instance, with variables passed in as parameters) is always nice for users too:
+Create a custom config file `templates/traefik.toml.j2`.
+Override template variable (e.g. in `group_vars/all.yml` )
 
+```yml
+traefik_template: templates/traefic.toml
+```
+
+Add role to your playbook.
+
+```yml
     - hosts: servers
       roles:
-         - { role: kibatic.traefik }
+         - { role: kibatic.traefik, tags: traefik }
+```
 
 License
 -------
