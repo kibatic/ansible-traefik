@@ -19,7 +19,7 @@ env:
 
 install:
   # Install ansible
-  - pip install ansible
+  - pip install ansible~=$ANSIBLE_VERSION
 
   # Check ansible version
   - ansible --version
