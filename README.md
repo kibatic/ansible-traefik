@@ -1,4 +1,4 @@
-Role Name
+kibatic.traefik
 =========
 
 Ansible role to deploy traefik binary and systemd unit.
@@ -9,10 +9,13 @@ Role Variables
 --------------
 
 ```yml
-traefik_install_dir: /usr/local/bin
+traefik_install_dir: /usr/bin
 traefik_binary_url: https://github.com/containous/traefik/releases/download/v1.1.2/traefik_linux-amd64
 traefik_bin_path: "{{ traefik_install_dir }}/traefik"
-traefik_config_dir: /etc/traefik
+traefik_config_file: /etc/traefik.toml
+traefik_template: traefik.toml
+traefik_systemd_unit_url: "https://raw.githubusercontent.com/containous/traefik/master/contrib/systemd/traefik.service"
+traefik_systemd_unit_dest: /etc/systemd/system/traefik.service
 ```
 
 
