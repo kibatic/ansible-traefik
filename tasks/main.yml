@@ -10,7 +10,6 @@
   with_items:
     - url: "{{ traefik_systemd_unit_url }}"
       dest: "{{ traefik_systemd_unit_dest }}"
-  notify: restart traefik
   tags: traefik_config
 
 - name: Reload systemd daemon
@@ -25,7 +24,6 @@
     state: directory
   with_items:
     - "{{ traefik_install_dir }}"
-    - "{{ traefik_config_dir }}"
 
 - name: Download Traefik binary
   get_url:
@@ -41,8 +39,18 @@
 - name: Copy traefik config file
   template:
     src: "{{ traefik_template }}.j2"
-    dest: "{{ traefik_config_dir }}/{{ traefik_config_file }}"
+    dest: "{{ traefik_config_file }}"
     owner: root
     group: root
     mode: 0744
   tags: traefik_config
+
+- name: Enable traefik service at boot
+  service:
+    name: traefik
+    enabled: yes
+
+- name: Ensure traefic service is running
+  service:
+    name: traefik
+    state: started
