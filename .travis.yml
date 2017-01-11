@@ -1,4 +1,5 @@
 ---
+language: generic
 # Use the new container infrastructure
 sudo: required
 
