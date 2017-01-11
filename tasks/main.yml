@@ -1,4 +1,3 @@
----
 # tasks file for kibatic.traefik
 ---
 - name: Ensure install & config directory exists
