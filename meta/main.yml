@@ -1,0 +1,22 @@
+---
+galaxy_info:
+  author: Elie Charra
+  description: Ansible role to deploy traefik binary and systemd unit
+  company: Kibatic
+  license: MIT
+  min_ansible_version: 1.9
+  platforms:
+    - name: Ubuntu
+      versions:
+        - trusty
+        - xenial
+    - name: Debian
+      versions:
+        - jessie
+  galaxy_tags:
+    - docker
+    - reverse_proxy
+    - load_balancer
+  categories:
+    - web
+dependencies: []
