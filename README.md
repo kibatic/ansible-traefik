@@ -5,6 +5,11 @@ Ansible role to deploy traefik binary and systemd unit.
 
 [![Build Status](https://travis-ci.org/kibatic/ansible-traefik.svg?branch=master)](https://travis-ci.org/kibatic/ansible-traefik)
 
+Installation
+--------------
+
+`$ ansible-galaxy install kibatic.traefik`
+
 Role Variables
 --------------
 
