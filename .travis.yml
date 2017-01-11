@@ -15,9 +15,9 @@ env:
 before_install:
   # Pull container
   - sudo docker pull kitpages/docker-ansible:$ANSIBLE_VERSION
-  - alias ansible-playbook="docker run -it --rm -v ${PWD}:/ansible -w /ansible kitpages/docker-ansible:$ANSIBLE_VERSION ansible-playbook"
 
 install:
+  - alias ansible-playbook="docker run -it --rm -v ${PWD}:/ansible -w /ansible kitpages/docker-ansible:$ANSIBLE_VERSION ansible-playbook"
   # Check ansible version
   - ansible-playbook --version
 
