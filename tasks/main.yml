@@ -10,13 +10,9 @@
   with_items:
     - url: "{{ traefik_systemd_unit_url }}"
       dest: "{{ traefik_systemd_unit_dest }}"
-  tags: traefik_config
 
 - name: Reload systemd daemon
   shell: systemctl daemon-reload
-  tags:
-      - systemd
-      - systemd_units
 
 - name: Ensure install & config directory exists
   file:
@@ -43,7 +39,6 @@
     owner: root
     group: root
     mode: 0744
-  tags: traefik_config
 
 - name: Enable traefik service at boot
   service:
