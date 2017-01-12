@@ -5,6 +5,8 @@ Ansible role to deploy traefik binary and systemd unit.
 
 [![Build Status](https://travis-ci.org/kibatic/ansible-traefik.svg?branch=master)](https://travis-ci.org/kibatic/ansible-traefik)
 
+Træfɪk is a modern HTTP reverse proxy and load balancer made to deploy microservices with ease. It supports several backends (Docker, Swarm, Kubernetes, Marathon, Mesos, Consul, Etcd, Zookeeper, BoltDB, Rest API, file…) to manage its configuration automatically and dynamically.
+
 Installation
 --------------
 
