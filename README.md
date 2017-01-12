@@ -21,7 +21,7 @@ traefik_binary_url: https://github.com/containous/traefik/releases/download/v1.1
 traefik_bin_path: "{{ traefik_install_dir }}/traefik"
 traefik_config_file: /etc/traefik.toml
 traefik_template: traefik.toml
-traefik_systemd_unit_url: "https://raw.githubusercontent.com/containous/traefik/master/contrib/systemd/traefik.service"
+traefik_systemd_unit_template: traefik.service
 traefik_systemd_unit_dest: /etc/systemd/system/traefik.service
 ```
 
