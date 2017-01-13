@@ -42,7 +42,7 @@
 # Optional
 # Default: "ERROR"
 #
-# logLevel = "ERROR"
+logLevel = "INFO"
 
 # Backends throttle duration: minimum duration in seconds between 2 events from providers
 # before applying a new configuration. It avoids unnecessary reloads if multiples events
@@ -378,20 +378,20 @@
 #
 # Required
 #
-# endpoint = "unix:///var/run/docker.sock"
+endpoint = "unix:///var/run/docker.sock"
 
 # Default domain used.
 # Can be overridden by setting the "traefik.domain" label on a container.
 #
 # Required
 #
-# domain = "docker.localhost"
+domain = "localhost"
 
 # Enable watch docker changes
 #
 # Optional
 #
-# watch = true
+watch = true
 
 # Override default configuration template. For advanced users :)
 #
