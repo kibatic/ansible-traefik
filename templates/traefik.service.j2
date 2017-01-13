@@ -1,0 +1,12 @@
+# This unit file is retrieved from traefik github repository
+# @see https://raw.githubusercontent.com/containous/traefik/master/contrib/systemd/traefik.service
+[Unit]
+Description=Traefik
+
+[Service]
+Type=notify
+ExecStart={{ traefik_bin_path }} --configFile={{ traefik_config_file }}
+Restart=on-failure
+
+[Install]
+WantedBy=multi-user.target

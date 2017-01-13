@@ -1,15 +1,12 @@
 # tasks file for kibatic.traefik
 ---
 - name: Create traefik systemd unit
-  get_url:
-    url: "{{ item.url }}"
-    dest: "{{ item.dest }}"
+  template:
+    src: "{{ traefik_systemd_unit_template }}.j2"
+    dest: "{{ traefik_systemd_unit_dest }}"
     owner: root
     group: root
-    mode: 0755
-  with_items:
-    - url: "{{ traefik_systemd_unit_url }}"
-      dest: "{{ traefik_systemd_unit_dest }}"
+    mode: 0744
 
 - name: Reload systemd daemon
   shell: systemctl daemon-reload
