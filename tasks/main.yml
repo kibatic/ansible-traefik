@@ -36,12 +36,5 @@
     group: root
     mode: 0744
 
-- name: Enable traefik service at boot
-  service:
-    name: traefik
-    enabled: yes
-
-- name: Ensure traefic service is running
-  service:
-    name: traefik
-    state: started
+- name: Ensure traefik service is enabled and running
+  service: name=traefik state=started enabled=yes
