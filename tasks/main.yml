@@ -7,9 +7,8 @@
     owner: root
     group: root
     mode: 0744
-
-- name: Reload systemd daemon
-  shell: systemctl daemon-reload
+  notify:
+    - Reload systemd daemon
 
 - name: Ensure install & config directory exists
   file:
