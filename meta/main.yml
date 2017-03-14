@@ -13,6 +13,9 @@ galaxy_info:
     - name: Debian
       versions:
         - jessie
+    - name: EL
+      versions:
+      - 7
   galaxy_tags:
     - docker
     - reverse_proxy
