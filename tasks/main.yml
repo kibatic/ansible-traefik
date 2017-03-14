@@ -9,6 +9,7 @@
     mode: 0744
   notify:
     - Reload systemd daemon
+    - Restart traefik
 
 - name: Ensure install & config directory exists
   file:
@@ -35,6 +36,8 @@
     owner: root
     group: root
     mode: 0744
+  notify:
+    - Restart traefik
 
 - name: Ensure traefik service is enabled and running
   service: name=traefik state=started enabled=yes
