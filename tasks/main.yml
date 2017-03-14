@@ -6,7 +6,7 @@
     dest: "{{ traefik_systemd_unit_dest }}"
     owner: root
     group: root
-    mode: 0744
+    mode: 0644
   notify:
     - Reload systemd daemon
     - Restart traefik
