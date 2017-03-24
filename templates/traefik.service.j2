@@ -6,7 +6,7 @@ Description=Traefik
 [Service]
 Type=notify
 ExecStart={{ traefik_bin_path }} --configFile={{ traefik_config_file }}
-Restart=on-failure
+Restart=always
 
 [Install]
 WantedBy=multi-user.target
