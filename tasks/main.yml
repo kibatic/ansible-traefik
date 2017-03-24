@@ -40,4 +40,7 @@
     - Restart traefik
 
 - name: Ensure traefik service is enabled and running
-  service: name=traefik state=started enabled=yes
+  service:
+    name: traefik
+    state: started
+    enabled: yes
