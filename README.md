@@ -33,7 +33,7 @@ Create a custom config file `templates/traefik.toml.j2`.
 Override template variable (e.g. in `group_vars/all.yml` )
 
 ```yml
-traefik_template: templates/traefic.toml
+traefik_template: templates/traefik.toml
 ```
 
 Add role to your playbook.
