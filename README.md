@@ -44,6 +44,18 @@ Add role to your playbook.
          - { role: kibatic.traefik, tags: traefik }
 ```
 
+Update Traefik
+--------------
+
+You have to change `traefik_binary_url` or update this role. Then run your playbook
+with following **extra vars** :
+
+```bash
+$ ansible-playbook playbook.yml -t traefik --extra-vars "traefik_update=yes"
+```
+
+Use same command if you want to downgrade.
+
 License
 -------
 
