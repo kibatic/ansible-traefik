@@ -8,7 +8,6 @@
     group: root
     mode: 0644
   notify:
-    - Reload systemd daemon
     - Restart traefik
 
 - name: Ensure install & config directory exists
@@ -48,7 +47,8 @@
       dest: "{{ traefik_bin_path }}"
 
 - name: Ensure traefik service is enabled and running
-  service:
+  systemd:
     name: traefik
     state: started
     enabled: yes
+    daemon_reload: yes
