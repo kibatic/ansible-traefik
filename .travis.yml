@@ -7,26 +7,26 @@ services:
   - docker
 
 env:
-  - ANSIBLE_VERSION: 2.2
-  - ANSIBLE_VERSION: 2.3
-  - ANSIBLE_VERSION: 2.4
-  - ANSIBLE_VERSION: 2.5
-  - ANSIBLE_VERSION: 2.6
-  - ANSIBLE_VERSION: 2.7
+  - ANSIBLE_VERSION: v2.2
+  - ANSIBLE_VERSION: v2.3
+  - ANSIBLE_VERSION: v2.4.6.0-1
+  - ANSIBLE_VERSION: v2.5.12
+  - ANSIBLE_VERSION: v2.6.9
+  - ANSIBLE_VERSION: v2.7.3
 
 install:
   # Pull container
-  - sudo docker pull kitpages/docker-ansible:$ANSIBLE_VERSION
+  - sudo docker pull generik/ansible:$ANSIBLE_VERSION
 
   # Check ansible version
-  - sudo docker run -it --rm -v ${PWD}:/ansible -w /ansible kitpages/docker-ansible:$ANSIBLE_VERSION ansible-playbook --version
+  - sudo docker run -it --rm -v `pwd`:/ansible -w /ansible generik/ansible:$ANSIBLE_VERSION ansible-playbook --version
 
   # Create ansible.cfg with correct roles_path
   - printf '[defaults]\nroles_path=../' >ansible.cfg
 
 script:
   # Basic role syntax check
-  - sudo docker run -it --rm -v ${PWD}:/ansible-traefik -w /ansible-traefik kitpages/docker-ansible:$ANSIBLE_VERSION ansible-playbook tests/test.yml -i tests/inventory --syntax-check
+  - sudo docker run -it --rm -v ${PWD}:/ansible-traefik -w /ansible-traefik generik/ansible:$ANSIBLE_VERSION ansible-playbook tests/test.yml -i tests/inventory --syntax-check
 
 notifications:
   webhooks: https://galaxy.ansible.com/api/v1/notifications/
