@@ -7,10 +7,12 @@ services:
   - docker
 
 env:
-  - ANSIBLE_VERSION: 1.9
-  - ANSIBLE_VERSION: 2.0
-  - ANSIBLE_VERSION: 2.1
   - ANSIBLE_VERSION: 2.2
+  - ANSIBLE_VERSION: 2.3
+  - ANSIBLE_VERSION: 2.4
+  - ANSIBLE_VERSION: 2.5
+  - ANSIBLE_VERSION: 2.6
+  - ANSIBLE_VERSION: 2.7
 
 install:
   # Pull container
