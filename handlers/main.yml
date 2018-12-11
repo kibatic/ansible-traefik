@@ -1,7 +1,8 @@
 ---
 # handlers file for kibatic.traefik
-- name: Reload systemd daemon
-  command: systemctl daemon-reload
-
 - name: Restart traefik
-  command: systemctl restart traefik
+  systemd:
+    name: traefik
+    state: restarted
+    enabled: yes
+    daemon_reload: yes
