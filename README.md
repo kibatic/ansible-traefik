@@ -17,7 +17,7 @@ Role Variables
 
 ```yml
 traefik_install_dir: /usr/bin
-traefik_binary_url: https://github.com/containous/traefik/releases/download/v1.5.0/traefik_linux-amd64
+traefik_binary_url: https://github.com/containous/traefik/releases/download/v1.7.5/traefik_linux-amd64
 traefik_bin_path: "{{ traefik_install_dir }}/traefik"
 traefik_config_file: /etc/traefik.toml
 traefik_template: traefik.toml
