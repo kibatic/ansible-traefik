@@ -32,7 +32,7 @@
     name: traefik
     state: stopped
     enabled: yes
-  when: traefik_update == "yes"
+  when: traefik_update | bool == True
 
 - name: Download Traefik binary
   get_url:
@@ -41,7 +41,7 @@
     owner: root
     group: root
     mode: 0755
-    force: "{{ traefik_update }}"
+    force: "{{ traefik_update | bool }}"
   with_items:
     - url: "{{ traefik_binary_url }}"
       dest: "{{ traefik_bin_path }}"
