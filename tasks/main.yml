@@ -16,6 +16,7 @@
     state: directory
   with_items:
     - "{{ traefik_install_dir }}"
+    - "{{ traefik_config_file | dirname }}"
 
 - name: Copy traefik config file
   template:
