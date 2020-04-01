@@ -45,6 +45,31 @@
   with_items:
     - url: "{{ traefik_binary_url }}"
       dest: "{{ traefik_bin_path }}"
+  when: "'tar.gz' not in traefik_binary_url"
+
+- name: Download Traefik archive
+  block:
+    - name: Download Traefik archive
+      unarchive:
+        src: "{{ item.url }}"
+        dest: "{{ item.dest }}"
+        # force the download of the archive in case of an update.
+        creates: "{{ '/dev/nulltraefik' if traefik_update | bool else traefik_bin_path }}"
+        remote_src: yes
+        owner: root
+        group: root
+        mode: 0755
+        extra_opts:
+          - traefik  # only extract traefik binary.
+      with_items:
+        - url: "{{ traefik_binary_url }}"
+          dest: "{{ traefik_bin_path | dirname }}"
+      register: archive_download
+
+    - name: Rename traefik binary
+      command: "mv {{ traefik_bin_path | dirname }}/traefik {{ traefik_bin_path }}"
+      when: 'archive_download is changed and traefik_bin_path | dirname + "/traefik" != traefik_bin_path'
+  when: "'tar.gz' in traefik_binary_url"
 
 - name: Ensure traefik service is enabled and running
   systemd:
