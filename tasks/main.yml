@@ -28,24 +28,14 @@
   notify:
     - Restart traefik
 
-- name: Ensure traefik service is stopped before traefik update
-  service:
-    name: traefik
-    state: stopped
-    enabled: yes
-  when: traefik_update | bool == True
+- name: Check if binary exists
+  stat:
+    path: "{{ traefik_bin_path }}"
+  register: traefik_bin
 
-- name: Download Traefik binary
-  get_url:
-    url: "{{ item.url }}"
-    dest: "{{ item.dest }}"
-    owner: root
-    group: root
-    mode: 0755
-    force: "{{ traefik_update | bool }}"
-  with_items:
-    - url: "{{ traefik_binary_url }}"
-      dest: "{{ traefik_bin_path }}"
+- include_tasks:
+    file: install.yml
+  when: traefik_update or not traefik_bin.stat.exists
 
 - name: Ensure traefik service is enabled and running
   systemd:
