@@ -23,7 +23,7 @@
     dest: "{{ traefik_config_file }}"
     owner: root
     group: root
-    mode: 0744
+    mode: 0644
   notify:
     - Restart traefik
 
