@@ -34,17 +34,31 @@
     enabled: yes
   when: traefik_update | bool == True
 
+- name: "Decide whether to unarchive the artifact and override binary"
+  set_fact:
+    unarchive_artifact: "{{ traefik_binary_url is search('.tar.gz') }}"
+    tar_flags: "{{ traefik_update | bool | ternary('traefik', '--skip-old-files traefik') }}"
+
 - name: Download Traefik binary
   get_url:
-    url: "{{ item.url }}"
-    dest: "{{ item.dest }}"
+    url: "{{ traefik_binary_url }}"
+    dest: "{{ traefik_bin_path }}"
     owner: root
     group: root
     mode: 0755
     force: "{{ traefik_update | bool }}"
-  with_items:
-    - url: "{{ traefik_binary_url }}"
-      dest: "{{ traefik_bin_path }}"
+  when: not unarchive_artifact
+
+- name: Download Traefik binary and unarchive it
+  unarchive:
+    src: "{{ traefik_binary_url }}"
+    remote_src: yes
+    dest: "{{ traefik_install_dir }}"
+    owner: root
+    group: root
+    mode: 0755
+    extra_opts: tar_flags # Only extract binary
+  when: unarchive_artifact
 
 - name: Ensure traefik service is enabled and running
   systemd:
