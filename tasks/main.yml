@@ -23,7 +23,7 @@
     dest: "{{ traefik_config_file }}"
     owner: root
     group: root
-    mode: 0744
+    mode: 0644
   notify:
     - Restart traefik
 
@@ -32,7 +32,7 @@
     name: traefik
     state: stopped
     enabled: yes
-  when: traefik_update == "yes"
+  when: traefik_update | bool == True
 
 - name: check if traefik bin exists
   stat:
@@ -48,6 +48,7 @@
     mode: 0755
     remote_src: yes
     keep_newer: yes
+    force: "{{ traefik_update | bool }}"
   with_items:
     - url: "{{ traefik_binary_url }}"
       dest: "{{ traefik_install_dir }}"
