@@ -35,17 +35,25 @@
     enabled: yes
   when: traefik_update | bool == True
 
+- name: check if traefik bin exists
+  stat:
+    path: "{{ traefik_bin_path }}"
+  register: traefik_bin
+
 - name: Download Traefik binary
-  get_url:
-    url: "{{ item.url }}"
+  unarchive:
+    src: "{{ item.url }}"
     dest: "{{ item.dest }}"
     owner: root
     group: root
     mode: 0755
+    remote_src: yes
+    keep_newer: yes
     force: "{{ traefik_update | bool }}"
   with_items:
     - url: "{{ traefik_binary_url }}"
-      dest: "{{ traefik_bin_path }}"
+      dest: "{{ traefik_install_dir }}"
+  when: traefik_bin.stat.exists == False
 
 - name: Ensure traefik service is enabled and running
   systemd:
