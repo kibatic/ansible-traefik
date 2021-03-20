@@ -1,0 +1,40 @@
+- name: Create temporary download directory
+  tempfile:
+    state: directory
+  register: download_dir
+
+- name: Download Traefik
+  get_url:
+    url: "{{ traefik_binary_url }}"
+    dest: "{{ download_dir.path }}"
+  register: traefik_download
+
+- name: Check type of downloaded asset
+  stat:
+    path: "{{ traefik_download.dest }}"
+  register: traefik_download_info
+
+- set_fact:
+    traefik_is_executable: "{{ traefik_download_info.stat.mimetype == 'application/x-executable' }}"
+
+- name: Unarchive traefik asset
+  unarchive:
+    src: "{{ traefik_download.dest }}"
+    dest: "{{ download_dir.path }}"
+    remote_src: yes
+  when: not traefik_is_executable
+
+- name: Ensure traefik service is stopped before traefik update
+  service:
+    name: traefik
+    state: stopped
+    enabled: yes
+
+- name: Copy traefik executable
+  copy:
+    src: "{{ traefik_download.dest if traefik_is_executable else download_dir.path + '/traefik' }}"
+    dest: "{{ traefik_bin_path }}"
+    owner: root
+    group: root
+    mode: 0755
+    remote_src: yes
