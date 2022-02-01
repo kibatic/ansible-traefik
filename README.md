@@ -1,3 +1,5 @@
+❗❗❗ **This role is not maintained anymore** ❗❗❗
+
 [archived] kibatic.traefik
 =========
 
