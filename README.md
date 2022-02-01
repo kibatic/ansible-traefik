@@ -1,5 +1,7 @@
-kibatic.traefik
+[archived] kibatic.traefik
 =========
+
+**/!\** This role is not maintained anymore **/!\**
 
 Ansible role to deploy traefik binary and systemd unit.
 
